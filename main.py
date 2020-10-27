@@ -10,13 +10,14 @@ import psutil
 import pyjokes
 
 
-engine=pyttsx3.init('dummy')
+engine = pyttsx3.init("sapi5")
 
 
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
+speak('hello')
 
 def time():
     Time=datetime.datetime.now().strftime("%I:%M:%S")
@@ -68,6 +69,10 @@ def takeCommand():
         return "None"
     return query
 
+
+
+
+
 def wikiSearch(query):
     query=query.replace("wikipedia","")
     result = wikipedia.summary(query,sentences=2)
@@ -116,7 +121,7 @@ def addRememberThat(data):
     remember.close()
     return
 def rememberThat():
-    remember=remember.open()
+    remember=open('data.txt','w')
     speak("wait a Sec Sir")
     speak("This ios what you want me to remeber")
     speak(remember.read())
@@ -137,6 +142,8 @@ if __name__ == "__main__":
     wishMe()
     while True:
         query=takeCommand().lower()
+
+
         if 'time' in query:
             time()
         elif 'date' in query:
@@ -144,14 +151,16 @@ if __name__ == "__main__":
         elif 'wikipedia' in query:
             speak('Searching...')
             wikiSearch(query)
+
         elif 'send email' in query :
-            try:
-                speak('what should i sent?')
-                content=takeCommand()
-                speak('Whom Should i Send?')
-                to=takeCommand()
-                sendEmail(to,content)
+            speak('what should i sent?')
+            content=takeCommand()
+            speak('Whom Should i Send?')
+            to=takeCommand()
+            sendEmail(to,content)
+
         elif 'search in chrome' in query:
+
             speak("What Should You i search ?")
             search=takeCommand().lower()
             serachInChrome(search)
@@ -175,9 +184,6 @@ if __name__ == "__main__":
             tellAJoke()
 
             
-            
-
-
             
         elif 'offline' in query:
             quit()
