@@ -17,7 +17,7 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
-speak('hello')
+# speak('hello')
 
 def time():
     Time=datetime.datetime.now().strftime("%I:%M:%S")
